@@ -1,0 +1,85 @@
+﻿@model SchoolManagementSystem.ViewModels.StudentViewModels
+@{
+    ViewBag.Title = "Student";
+}
+
+
+
+<div class="tableBackground pad">
+    <table class="table table-striped">
+        <caption class="alignText margin_bottom_20">
+            @using (Html.BeginForm("Student", "Home", FormMethod.Get, new { @class = "student" }))
+            {
+                <select class="btn dropdown-toggle classButton user" data-toggle="dropdown" name="data" onchange="this.form.submit();">
+                    <option value="" class="dropdownItem">Select Class</option>
+
+                    @foreach (var item in Model.GetClassDetails)
+                    {
+                        int counter = 0;
+                        foreach (var classCheck in Model.GetStudentClasses)
+                        {
+                            int count = Model.GetStudentClasses.Count;
+                            if (item.ClassId.Equals(classCheck))
+                            {
+                                <option value="@item.ClassId" class="dropdownItem">@item.ClassName</option>
+                                break;
+                            }
+                            else if (counter == (count - 1))
+                            {
+                                <option value="@item.ClassId" disabled class="dropdownItem selectBackground">@item.ClassName</option>
+                            }
+                            counter++;
+                        }
+                    }
+                </select>
+                foreach (var Class in Model.GetStudent)
+                {
+                    <h2 class="marginTop_0">Class: @Class.ClassDetail.ClassName</h2>
+                    break;
+                }
+            }
+
+
+        </caption>
+        <tr>
+            <th>Student Name</th>
+            <th>Father Name</th>
+            <th>Contact Number</th>
+            <th>Class</th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in Model.GetStudent)
+        {
+
+            <tr>
+                <td>
+                    @item.StudentName
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FatherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactNumber)
+                </td>
+                <td>
+                    @item.ClassDetail.ClassName
+                </td>
+                <td>
+                    <!--<a href="~/Misc/StudentView">View</a>-->
+                    @Html.ActionLink("Edit", "Home", new { RegistrationId = item.RegistrationNumber }, htmlAttributes: null)
+                    &nbsp&nbsp
+                    @{
+                        if ((string)Session["UserType"] == ("admin"))
+                        {
+                            <a href="@Url.Action("EditStudentDetails", "Misc", new {RegistrationNumber = item.RegistrationNumber })">Edit</a>
+                        }
+                    }
+                </td>
+            </tr>
+
+        }
+
+    </table>
+
+</div>

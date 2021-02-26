@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SchoolManagementSystem.Models.Salary>
+@{
+    ViewBag.Title = "EditSalary";
+}
+@using (Html.BeginForm("EditSalary", "Misc", FormMethod.Post))
+{
+foreach(var item in Model)
+    {
+        <div class="form-horizontal formDiv">
+            <h4>Employee Salary</h4>
+            <hr />
+            <div class="form-group">
+                <label class="control-label col-md-2">Employee</label>
+                <div class="col-md-8">
+                    <input class="form-control" value="@item.Employee.Name" readonly="readonly">
+                    <input value="@item.EmployeeId" name="employeeId" disabled/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Year/Month</label>
+                <div class="col-md-8">
+                    <input name="year" value="@item.Year" disabled/>
+                    <input name="monthId" value="@item.MonthId" disabled/>
+                    <input class="form-control" value="@item.Year / @item.Month.Month1" readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Days Attended</label>
+                <div class="col-md-8">
+                    <input type="number" min="1" max="31" class="form-control" name="daysAttended" value="@item.DaysAttended"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Salary Amount</label>
+                <div class="col-md-8">
+                    <input type="number" class="form-control" name="salary" value="@item.Salary1"/>
+                </div>
+            </div>
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" >
+            </div>
+        </div>
+    }
+
+}

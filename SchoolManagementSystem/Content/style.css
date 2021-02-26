@@ -1,0 +1,166 @@
+/*--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+--*/
+/* reset */
+
+/*end reset*/
+/*--header--*/
+.header-w3l {
+    padding-top: 2em;
+}
+.header-w3l h1 {
+    font-size: 2.5em;
+    color: #fff;
+    letter-spacing: 10px;
+    font-weight: 300;
+    text-shadow: 4px 5px 8px #101010;
+}
+.header-w3l h1 span {
+    color: #fb6906;
+}
+/*--//header--*/
+/*--main--*/
+.sub-main-w3 {
+    width: 29%;
+    margin: 20px auto;
+   background:#eaf4f659;
+    padding: 10px;
+}
+    .sub-main-w3 h2 {
+        color: #fff;
+        font-size: 1.8em;
+        letter-spacing: 1px;
+        margin-bottom: 1em;
+        font-weight: 300;
+        margin-top: 10px
+    }
+.pom-agile {
+    padding: 12px 15px;
+    border-bottom:2px solid #eaf4f659;
+    background: #fff;
+}
+.pom-agile:nth-child(1){
+    margin-bottom: 15px;
+}
+.pom-agile input[type="email"], .pom-agile input[type="password"] {
+    outline: none;
+    font-size: .9em;
+    border: none;
+    background: transparent;
+    color: #000;
+    letter-spacing: 1px;
+}
+.right-w3l input[type="submit"] {
+    color: #fff;
+    background:#09a5cd;
+    border: none;
+    padding: 12px 45px;
+    outline: none;
+    font-size: .9em;
+    cursor: pointer;
+    letter-spacing: 1px;
+    -webkit-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    transition: 0.5s all;
+}
+.right-w3l input[type="submit"]:hover {
+    background: #fff;
+    color: black;
+	-webkit-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+	transition: 0.5s all;
+}
+span.fa {
+    float: left;
+    color: #000;
+    margin: 0.2em 0 0 0;
+}
+.sub-w3l {
+    padding: 20px 0 30px;
+}
+.sub-agile {
+    float: left;
+}
+.sub-agile input[type="checkbox"] {
+    display: none;
+}
+.sub-agile input[type="checkbox"]+label {
+    position: relative;
+    padding-left: 25px;
+    display: inline-block;
+    font-size: .9em;
+    color: #fff;
+    cursor: pointer;
+}
+.sub-agile input[type="checkbox"]+label span:first-child {
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    border: 1px solid #fff;
+    position: absolute;
+    top: 1px;
+    left: 2px;
+}
+.sub-agile input[type="checkbox"]:checked+label span:first-child:before {
+    content: "";
+    background: url(../images/tick.png)no-repeat;
+    position: absolute;
+    left: 2px;
+    top: 1px;
+    font-size: 10px;
+    width: 10px;
+    height: 10px;
+}
+.sub-w3l a {
+    float: right;
+    font-size: .9em;
+    color: #fff;
+}
+.loginText {
+    text-align:center;
+}
+.text-box {
+    width: 260px;
+    height: 20px;
+    margin-left: 10px
+}
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 5px solid transparent;
+}
+@media (min-width: 768px) {
+    .navbar-nav {
+        float: left;
+    }
+}
+    /* margin: 0; */
+
+
+.navbar-nav {
+    margin: 7.5px -15px;
+}
+
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+.btn-group-vertical > .btn-group:after, .btn-group-vertical > .btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+        display: table;
+        content: " ";
+  }
+    .nav:after, .navbar-collapse:after, .navbar-header:after, .navbar:after, .pager:after, .panel-body:after, .row:after {
+        clear: both;
+}
+    .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+        display: table;
+        content: " ";
+}
+

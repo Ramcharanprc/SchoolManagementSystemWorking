@@ -1,0 +1,110 @@
+﻿@model SchoolManagementSystem.ViewModels.StudentViewModels
+
+@{
+    ViewBag.Title = "AddClass";
+}
+@if (ViewBag.Successful != null)
+{
+    <script>
+        window.onload = function () {
+            swal({
+                title: "Success!",
+                type: "success",
+                text : "@ViewBag.Successful"
+            });
+        }
+    </script>
+    ViewBag.Successful = null;
+}
+@if (ViewBag.Error != null)
+{
+    <script>
+        window.onload = function () {
+            swal({
+                title: "Error!",
+                type: "error",
+                text : "@ViewBag.Error"
+            });
+        }
+    </script>
+    ViewBag.Error = null;
+}
+@{
+    var EmployeeDropdown = "";
+    var SubjectDropdown = "";
+    foreach (var employee in Model.GetEmployee)
+    {
+        EmployeeDropdown = EmployeeDropdown + "<option value='" + employee.EmployeeId + "'>" + employee.Name + "</option>";
+    }
+    foreach (var Subject in Model.GetSubject)
+    {
+        SubjectDropdown = SubjectDropdown + "<option value='" + Subject.SubjectId + "'>" + Subject.SubjectName + "</option>";
+    }
+}
+<input value="@EmployeeDropdown" id="empDropDown" hidden />
+<input value="@SubjectDropdown" id="subDropDown" hidden />
+<script>
+    function addSubject() {
+        $("#addNewSubject").append("<div class='form-group'><div class='col-md-2'> " + "<select class='form-control' name='teacherDetails' required>" +
+            "<option value=''>-Select Teacher-</option>" + $("#empDropDown").val() + "</select>" +
+            "</div ><div class='col-md-2'><select class='form-control' name = 'subjectDetails' required><option value=''>-Select Subject-</option>" +
+            $("#subDropDown").val() + "</select></div></div>");
+        counter = parseInt(counter) + 1;
+    }
+    function removeSubject() {
+        if ($("#addNewSubject div").length > 5) {
+            $("#addNewSubject").contents().last().remove();
+        }
+    }
+</script>
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal formPadding " id='addNewSubject'>
+        <h4>Class</h4>
+        <hr />
+        <div class="form-group" id="ClassDetails">
+            <div class="col-md-2">
+                <input type="number" name="classId" class="form-control" placeholder="Class" required />
+            </div>
+            <div class="col-md-2">
+                <input type="text" name="className" class="form-control" placeholder="Class Name" required />
+            </div>
+        </div>
+        <div class='form-group'>
+            <div class='col-md-2'>
+                <select class='form-control' name='teacherDetails' required>
+                    <option value=''>-Select Teacher-</option>
+                    @foreach (var employee in Model.GetEmployee)
+                    {
+                        <option value='@employee.EmployeeId'>@employee.Name</option>
+                    }
+                </select>
+            </div>
+            <div class='col-md-2'>
+                <select class='form-control' name='subjectDetails' required>
+                    <option value="">-Select Subject-</option>
+                    @foreach (var Subject in Model.GetSubject)
+                    {
+                        <option value='@Subject.SubjectId'>@Subject.SubjectName</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-6">
+            <div class="col-md-offset-2 col-md-10 marginBottom">
+                <input type="button" id="Add" class="btn btn-default" value="Add Subject" onclick="addSubject()" />
+                <input type="button" id="Remove" class="btn btn-default" value="Remove Subject" onclick="removeSubject()" />
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="col-md-offset-2">
+                <input type="submit" value="Create" class="btn btn-default" />
+                @Html.ActionLink("Back", "Administration", "Home", new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+
+}
+

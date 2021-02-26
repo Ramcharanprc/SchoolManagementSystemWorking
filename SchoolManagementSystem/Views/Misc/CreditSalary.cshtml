@@ -1,0 +1,66 @@
+﻿@model IEnumerable<SchoolManagementSystem.Models.Employee>
+@{
+    ViewBag.Title = "AddSalary";
+}
+@if (ViewBag.Successful != null)
+{
+    <script>
+        swal({
+            type: "success",
+            title: "Success",
+            text: "@ViewBag.Successful"
+        })
+    </script>
+    ViewBag.Successful = null;
+}
+@if (ViewBag.Error != null)
+{
+    <script>
+        swal({
+            type: "error",
+            title: "Error",
+            text: "@ViewBag.Error"
+        })
+    </script>
+    ViewBag.Error = null;
+}
+@using (Html.BeginForm("CreditSalary", "Misc", FormMethod.Post))
+{
+    <div class="form-horizontal formDiv">
+        <h4>Employee Salary</h4>
+        <hr />
+        <div class="form-group required">
+            <label class="control-label col-md-2">Employee</label>
+            <div class="col-md-8">
+                <select class="form-control" name="employeeId" required>
+                    <option>--Select Employee--</option>
+                    @foreach (var employee in Model)
+                    {
+                        <option value="@employee.EmployeeId">@employee.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group required">
+            <label class="control-label col-md-2">Month</label>
+            <div class="col-md-8">
+                <input type="month" name="date" class="form-control" required />
+            </div>
+        </div>
+        <div class="form-group required">
+            <label class="control-label col-md-2">Days Attended</label>
+            <div class="col-md-8">
+                <input type="number" min="1" max="31" class="form-control" name="daysAttended" required />
+            </div>
+        </div>
+        <div class="form-group required">
+            <label class="control-label col-md-2">Salary Amount</label>
+            <div class="col-md-8">
+                <input type="number" class="form-control" name="salary" required />
+            </div>
+        </div>
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" required>
+        </div>
+    </div>
+}

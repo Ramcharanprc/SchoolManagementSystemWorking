@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SchoolManagementSystem.Models.Employee>
+@{
+    ViewBag.Title = "ShowEmployee";
+}
+@if(ViewBag.Successful != null)
+{
+    <script>
+        swal({
+            title: "Success",
+            type: "success",
+            text: "@ViewBag.Successful"
+        });
+    </script>
+    ViewBag.Successful = null;
+}
+<div class="tableBackground pad">
+    <table class="table table-striped deleteToggle">
+        <tr>
+            <th>Name</th>
+            <th>Designation</th>
+            <th>Contact Number</th>
+            <th>E-Mail</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Designation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <!--<a href="~/Misc/StudentView">View</a>-->
+                    @Html.ActionLink("View", "TeacherView", "Misc", new { EmployeeId = item.EmployeeId }, htmlAttributes: null)
+                    &nbsp&nbsp
+                    @{
+                        if ((string)Session["UserType"] == ("admin"))
+                        {
+
+                            <a href=@Url.Action("EditEmployeeDetails", "Misc", new {employeeId = item.EmployeeId})>Edit</a>
+                        }
+                    }
+                    <button data-toggle="tooltip" data-placement="right" title="Delete" onclick='deleteEmployee("@item.EmployeeId")'><i class="fa fa-trash"></i></button>
+                </td>
+            </tr>
+
+        }
+
+    </table>
+</div>
+<script>
+    function deleteEmployee(employeeId) {
+    swal({
+        title: "Success",
+        type: "warning",
+        text: "Are you sure!",
+        closeOnConfirm: false,
+        showCancelButton: true
+    }, function (isConfirm) {
+            if (isConfirm) {
+                window.location.href = "@Url.Action("DeleteEmployee", "Misc")" + "?employeeId=" + employeeId;
+            }
+    });
+}
+</script>
+
+

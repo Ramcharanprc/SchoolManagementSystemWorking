@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SchoolManagementSystem.Models.Salary>
+@{
+    ViewBag.Title = "Salary";
+}
+@if(ViewBag.NoData != null)
+{
+    <script>
+        swal({
+            type: "warning",
+            title: "Sorry",
+            text: "@ViewBag.NoData"
+        });
+    </script>
+        ViewBag.NoData = null;
+    }
+
+<div class="tableBackground salary" id="myDiv">
+    <table class="table table-striped">
+        @foreach (var item in Model)
+        {
+            <caption class="alignText">
+                <a class="btn btn-default classButton" href="@Url.Action("CreditSalary", "Misc")">Add Employee Salary</a>
+                @using (Html.BeginForm("Salary", "Misc", FormMethod.Get))
+                {
+                    <input type="month" name="month" />
+                    <input class="btn btn-default classButton" type="submit" />
+                    <lable>@item.Month.Month1 / @item.Year</lable>
+}
+            </caption>
+            break;
+        }
+        <tr>
+            <th>Employee</th>
+            <th>Salary</th>
+            <th>Days Attended</th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+    <tr>
+        <td>
+            @item.Employee.Name
+        </td>
+        <td>@item.Salary1</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DaysAttended)
+        </td>
+        <td><a href="@Url.Action("EditSalary", "Misc", new { EmployeeId = item.EmployeeId, year = item.Year, monthId= item.MonthId})">Edit</a></td>
+
+    </tr>
+        }
+        <lable></lable>
+
+    </table>
+</div>
+

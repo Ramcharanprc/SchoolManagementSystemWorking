@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Admistration";
+}
+
+<div class="admin">
+    <a class="btn btn-default card" href=@Url.Action("AddNewEmployee", "Misc")>Employee Registration</a>
+    <a class="btn btn-default card" href="@Url.Action("AddNewStudent", "Misc")">Student Registration</a>
+    <a class="btn btn-default card" href=@Url.Action("AddTimeTable", "Misc")>Create TimeTable</a>
+    <a class="btn btn-default card" href="@Url.Action("AddClass", "Misc")">Add Class</a>
+    <a class="btn btn-default card" href="@Url.Action("CreateNotification", "Misc")">Create Notification</a>
+    <a class="btn btn-default card" href="@Url.Action("ShowEmployee", "Misc")">Employees List</a>
+    <a class="btn btn-default card" href="@Url.Action("Salary", "Misc")">Employee Salary</a>
+    <a class="btn btn-default card" href="@Url.Action("Attendence", "Misc")">Attendence</a>
+</div>

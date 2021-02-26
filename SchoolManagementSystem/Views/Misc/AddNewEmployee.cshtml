@@ -1,0 +1,130 @@
+﻿@model SchoolManagementSystem.Models.Employee
+
+@{
+    ViewBag.Title = "AddNewEmployee";
+}
+@using (Html.BeginForm("AddNewEmployee", "Misc", FormMethod.Post, new { @class = "formSpecs", enctype = "multipart/form-data" }))
+{
+
+    <div class="form-horizontal formDiv">
+        <h4>Employee Registraion Form</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Employee Name</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Father Name</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.FatherName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.FatherName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Mother Name</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.MotherName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.MotherName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Designation</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Experience</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Experience, new { htmlAttributes = new { @class = "form-control", @type = "number", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Experience, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Address</label>
+            <div class="col-md-8 textArea">
+                @Html.TextAreaFor(model => model.Address, new { @class = "form-control", required = "required" } )
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Contact Number</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Email</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required = "required", type="email"} })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">User Type</label>
+            <div class="col-md-8  userTypeMargin">
+                @Html.DropDownListFor(model => model.UserType, new List<SelectListItem>
+           {
+               new SelectListItem(){Value="", Text = "--Select--"},
+               new SelectListItem(){Value="admin", Text = "Admin"},
+               new SelectListItem(){Value="Teacher", Text = "Teacher"},
+               new SelectListItem(){Value="Others", Text = "Others"}
+
+           }, new { @class = "form-control", required = "required" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", required = "required", type="password" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Date of Birth</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", required = "required", @type = "date" } })
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Year of Joining</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.YearOfJoining, new { htmlAttributes = new { @class = "form-control", required = "required", type= "date"} })
+                @Html.ValidationMessageFor(model => model.YearOfJoining, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Photo</label>
+            <div class="col-md-8">
+               <input type="file" name="ImageFile" required/>
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+                @Html.ActionLink("Back", "Administration", "Home", "", new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+}

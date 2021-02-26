@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SchoolManagementSystem.Models.Notification>
+@{
+    ViewBag.Title = "Notifications";
+}
+@if (ViewBag.Successful != null)
+{
+    <script>
+        swal({
+            type: "success",
+            title: "Success",
+            text: "@ViewBag.Successful"
+        });
+    </script>
+    ViewBag.Successful = null;
+}
+@if (ViewBag.Error != null)
+{
+    <script>
+        swal({
+            title: "Error",
+            type: "error",
+            text: "@ViewBag.Error"
+        });
+    </script>
+    ViewBag.Error = null;
+}
+<script>
+    function activateCheckbox() {
+        $("input[type='hidden']").attr("type", "checkbox");
+    }
+    function deleteNotification(id) {
+        swal({
+            type: "warning",
+            text: "Do you want to delete this notification?",
+            title: "Are you sure",
+            showCancelButton: true,
+            CloseOnConfirm: false,
+            confirmButtonClass: "btn btn-info",
+            confirmButtonText: "Yes"
+        }, function (isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "@Url.Action("DeleteNotification", "Misc")" + "?id=" + id;
+            }
+        }
+        );
+    }
+</script>
+<div class="notification">
+
+    <ul>
+        @foreach (var message in Model)
+        {
+            <li>
+                @if (Session["UserType"].Equals("admin"))
+                {
+                    <button data-toggle="tooltip" data-placement="right" title="Delete" onclick='deleteNotification("@message.id")'><i class="fa fa-trash"></i></button>
+                }
+                @{
+                    string[] messageConversion = message.Message.Split('\n');
+                }
+                <p class="titleStyle">@message.Title</p>
+                @foreach (var line in messageConversion)
+                {
+                    <p class="messageStyle">@line</p>
+                }
+                <p class="dateStyle">@message.DateValue.ToString().Substring(0, 10)</p>
+            </li>
+        }
+    </ul>
+</div>
+

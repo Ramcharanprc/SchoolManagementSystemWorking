@@ -1,0 +1,107 @@
+﻿@model SchoolManagementSystem.ViewModels.StudentViewModels
+@{
+    ViewBag.Title = "Attendence";
+}
+@{
+    var daysCount = 0;
+}
+@if (ViewBag.NoDetails != null)
+{
+    <script>
+        swal({
+            type: "warning",
+            title: "Sorry!",
+            text: "@ViewBag.NoDetails"
+        });
+    </script>
+    ViewBag.NoDetails = null;
+}
+<div class="tableBackground pad">
+    @using (Html.BeginForm("Attendence", "Misc", FormMethod.Get))
+    {
+        <div class="attendence">
+            <input type="month" name="month" />
+            <select class="btn-default classButton" style="margin:auto" name="classId">
+                <option value="">Select Class</option>
+                @foreach (var item in Model.GetClassDetails)
+                {
+                    <option value="@item.ClassId">@item.ClassName</option>
+                }
+            </select>
+            <input class="" type="submit" />
+
+        </div>
+    }
+
+    <table class="table table-striped">
+        @foreach (var item in Model.GetAttendence)
+        {
+            <caption class="alignText">Class : @item.ClassDetail.ClassName &emsp; @item.Month.Month1 / @item.Year
+        <a class="btn btn-default classButton" href="@Url.Action("RecordAttendence","Misc", new{ @classId = item.ClassId})">Add Attendence</a>
+        </caption>
+            break;
+        }
+        @{
+            int month = ViewBag.Month;
+            int year = Convert.ToInt32(ViewBag.Year);
+            daysCount = DateTime.DaysInMonth(year, month);
+
+        }
+        <tr>
+            <th>Student Name</th>
+            @for (int header = 0; header < daysCount; header++)
+            {
+                <th>@(header + 1)</th>
+            }
+        </tr>
+        @{var studentid = "";
+        }
+        @foreach (var item in Model.GetAttendence)
+        {
+            if (studentid != item.RegistrationNumber)
+            {
+                <tr>
+                    <td>@item.Student.StudentName</td>
+                    @{
+
+                        for (int counter = 0; counter < daysCount; counter++)
+                        {
+                            var modelDay = Model.GetAttendence.Where(a => a.RegistrationNumber == item.RegistrationNumber && a.Date == (counter + 1)).FirstOrDefault();
+                            DateTime val = new DateTime(year, month, (counter + 1));
+                            var day = val.ToString("dddd");
+                            if (day == "Sunday")
+                            {
+                                <td>&#10026</td>
+                            }
+                            else if (modelDay != null && (counter + 1) == modelDay.Date)
+                            {
+                                if (modelDay.Status == "Yes")
+                                {
+                                    <td>&#10004</td>
+                                }
+                                else
+                                {
+                                    <td>&#10006</td>
+                                }
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                        }
+                    }
+                </tr>
+            }
+
+            studentid = item.RegistrationNumber;
+        }
+
+
+    </table>
+</div>
+<div class="tableBackground">
+    <text>&#10004 -- Present</text><br />
+    <text>&#10006 -- Absent</text><br />
+    <text>&#10026 -- Sunday</text>
+</div>
+

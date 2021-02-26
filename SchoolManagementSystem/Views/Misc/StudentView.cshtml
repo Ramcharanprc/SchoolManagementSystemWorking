@@ -1,0 +1,113 @@
+﻿@model IEnumerable<SchoolManagementSystem.Models.Student>
+
+@{
+    ViewBag.Title = "StudentView";
+}
+    <body style="margin-top:0px">
+        <link href="~/Content/style1.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700" rel="stylesheet" />
+        <link href="//fonts.googleapis.com/css?family=Text+Me+One" rel="stylesheet" />
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet" />
+        <link href="~/Content/design.css" rel="stylesheet" />
+
+
+        <div class="main-section">
+
+            @foreach (var item in Model)
+            {
+                <div>
+                    <div class="child-left">
+                        @{
+                            if (item.StudentPhoto != null)
+                            {
+                                var data = item.StudentPhoto.Replace("~", "");
+                                <img alt="image" height="255" width="255" src="@data" />
+                            }
+                        }
+                    </div>
+
+                    <div class="child-right studentBackground">
+                        <h3>Student Name: @Html.DisplayFor(modelItem => item.StudentName)</h3>
+
+                        <h5>Class : @Html.DisplayFor(modelItem => item.ClassDetail.ClassName)</h5>
+
+                        <ul class="address">
+                            <li class="Detail">
+                                <ul class="agileits-address-text">
+                                    <li class="agile-it-adress-left"><b>Father Name</b></li>
+                                    <li><span>:</span>@Html.DisplayFor(modelItem => item.FatherName)</li>
+                                </ul>
+                            </li>
+                            <li class="Detail">
+                                <ul class="agileits-address-text">
+                                    <li class="agile-it-adress-left"><b>Mother Name</b></li>
+                                    <li><span>:</span>@Html.DisplayFor(modelItem => item.MotherName)</li>
+                                </ul>
+                            </li>
+                            <li class="Detail">
+                                <ul class="agileits-address-text">
+                                    <li class="agile-it-adress-left"><b>Gender</b></li>
+                                    <li><span>:</span>@Html.DisplayFor(modelItem => item.Gender)</li>
+                                </ul>
+                            </li>
+                            <li class="Detail">
+                                <ul class="agileits-address-text">
+                                    <li class="agile-it-adress-left"><b>Father Occupation</b></li>
+                                    <li><span>:</span>@Html.DisplayFor(modelItem => item.FatherOccupation)</li>
+                                </ul>
+                            </li>
+                            <li class="Detail">
+                                <ul class="agileits-address-text ">
+                                    @{ 
+                                        var date = item.DateOfBirth.ToString("dd/MMM/yyyy");
+                                    }
+                                    <li class="agile-it-adress-left"><b>Date of Birth</b></li>
+                                    <li><span>:</span>@Html.DisplayFor(modelItem => date)</li>
+                                </ul>
+                            </li>
+                            <li class="Detail">
+                                <ul class="agileits-address-text">
+                                    <li class="agile-it-adress-left"><b>Contact Number</b></li>
+                                    <li><span>:</span>@Html.DisplayFor(modelItem => item.ContactNumber)</li>
+                                </ul>
+                            </li>
+                            <li class="Detail">
+                                <ul class="agileits-address-text">
+                                    <li class="agile-it-adress-left"><b>Address</b></li>
+                                    <li><span>:</span>@Html.DisplayFor(modelItem => item.Address)</li>
+                                </ul>
+                            </li>
+                            <li class="Detail">
+                                <ul class="agileits-address-text">
+                                    <li class="agile-it-adress-left"><b>E-Mail</b></li>
+                                    <li><span>:</span>@Html.DisplayFor(modelItem => item.Email)</li>
+                                </ul>
+                            </li>
+                            <li class="Detail">
+                                <ul class="agileits-address-text">
+                                    <li class="agile-it-adress-left"><b>Blood Group</b></li>
+                                    <li><span>:</span>@Html.DisplayFor(modelItem => item.BloodGroup)</li>
+                                </ul>
+                            </li>
+                            <li class="Detail">
+                                <ul class="agileits-address-text">
+                                    @{ 
+                                        date = item.YearOfJoining.ToString("dd/MMM/yyyy");
+                                    }
+                                    <li class="agile-it-adress-left"><b>Year of Joining</b></li>
+                                    <li><span>:</span>@Html.DisplayFor(modelItem => date)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="clear">&nbsp;</div>
+                </div>
+            }
+
+        </div>
+            <div class="centerAlign">
+                @Html.ActionLink("Back", "Student", "Home", "", new { @class = "btn btn-default" })
+            </div>
+    </body>
+

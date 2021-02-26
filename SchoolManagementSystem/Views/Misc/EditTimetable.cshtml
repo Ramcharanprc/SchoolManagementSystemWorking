@@ -1,0 +1,162 @@
+﻿@model SchoolManagementSystem.ViewModels.StudentViewModels
+@{
+    ViewBag.Title = "EditTimetable";
+}
+@foreach (var item in Model.GetClass)
+{
+    <input id="SelectedClass" value="@item.ClassId" hidden />
+    break;
+}
+@if (ViewBag.Successful != null)
+{
+    <script type="text/javascript">
+        var Class = $("#SelectedClass").val();
+        window.onload = function () {
+            swal({
+                title: "Success!",
+                text: "@ViewBag.Successful",
+                type: "success",
+            }, function(value) {
+                if (value) {
+                    window.location.href = "@Url.Action("TimeTable", "Home")" + "?selectedClass=" + Class;
+                }
+            });
+        }
+    </script>
+    ViewBag.Successful = null;
+}
+@using (Html.BeginForm("EditTimetable", "Misc", FormMethod.Post))
+{
+
+    <div class="tableBackground">
+        <table class="table table-striped">
+
+            <tr>
+                <th>Hour Time</th>
+                @foreach (var Day in Model.GetDay)
+                {
+                    <th name=@Day.DayId>@Day.Day1</th>
+                }
+            </tr>
+            @{
+                int counter = 0;
+            }
+            @foreach (var item in Model.GetClass)
+            {
+                <input value="@item.ClassId" name="SelectedClass" hidden />
+                break;
+            }
+            @foreach (var Subject in Model.GetTimeTablePivot)
+            {
+                if (counter == 4)
+                {
+                    <tr>
+                        <td>12:00 PM - 01:00 PM</td>
+                        <td colspan="6" class="centerAlign">Lunch Break</td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        <input class="timeDisplay" type="text" name="@Subject.HourId" value="@Subject.HourTime" disabled />
+                    </td>
+
+                    <td>
+                        <select class="btn dropdown-toggle" name="SubjectId" required>
+                            @foreach (var item in Model.GetSubject)
+                            {
+                                if (Subject.Monday.Equals(item.SubjectName))
+                                {
+                                    <option value="@item.SubjectId">@Subject.Monday</option>
+                                }
+                            }
+                            @foreach (var subjectList in Model.GetSubject)
+                            {
+                                <option value="@subjectList.SubjectId">@subjectList.SubjectName</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <select class="btn dropdown-toggle" name="SubjectId" required>
+                            @foreach (var item in Model.GetSubject)
+                            {
+                                if (Subject.Tuesday.Equals(item.SubjectName))
+                                {
+                                    <option value="@item.SubjectId">@Subject.Tuesday</option>
+                                }
+                            }
+                            @foreach (var subjectList in Model.GetSubject)
+                            {
+                                <option value="@subjectList.SubjectId">@subjectList.SubjectName</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <select class="btn dropdown-toggle" name="SubjectId" required>
+                            @foreach (var item in Model.GetSubject)
+                            {
+                                if (Subject.Wednesday.Equals(item.SubjectName))
+                                {
+                                    <option value="@item.SubjectId">@Subject.Wednesday</option>
+                                }
+                            }
+                            @foreach (var subjectList in Model.GetSubject)
+                            {
+                                <option value="@subjectList.SubjectId">@subjectList.SubjectName</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <select class="btn dropdown-toggle" name="SubjectId" required>
+                            @foreach (var item in Model.GetSubject)
+                            {
+                                if (Subject.Thursday.Equals(item.SubjectName))
+                                {
+                                    <option value="@item.SubjectId">@Subject.Thursday</option>
+                                }
+                            }
+                            @foreach (var subjectList in Model.GetSubject)
+                            {
+                                <option value="@subjectList.SubjectId">@subjectList.SubjectName</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <select class="btn dropdown-toggle" name="SubjectId" required>
+                            @foreach (var item in Model.GetSubject)
+                            {
+                                if (Subject.Friday.Equals(item.SubjectName))
+                                {
+                                    <option value="@item.SubjectId">@Subject.Friday</option>
+                                }
+                            }                            @foreach (var subjectList in Model.GetSubject)
+                            {
+                                <option value="@subjectList.SubjectId">@subjectList.SubjectName</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <select class="btn dropdown-toggle" name="SubjectId" required>
+                            @foreach (var item in Model.GetSubject)
+                            {
+                                if (Subject.Saturday.Equals(item.SubjectName))
+                                {
+                                    <option value="@item.SubjectId">@Subject.Saturday</option>
+                                }
+                            }                            @foreach (var subjectList in Model.GetSubject)
+                            {
+                                <option value="@subjectList.SubjectId">@subjectList.SubjectName</option>
+                            }
+                        </select>
+                    </td>
+
+                </tr>
+
+                counter++;
+            }
+        </table>
+    </div>
+    <div class="centerAlign">
+        <input type="submit" value="Save" class="btn btn-default" />
+        <a class="btn btn-default" href="@Url.Action("Administration", "Home")">Back</a>
+    </div>
+}

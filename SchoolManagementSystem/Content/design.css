@@ -1,0 +1,421 @@
+﻿.disp{
+    background-color:white;
+}
+.userName {
+    color: #0077b5;
+    /*margin-top:25px;*/
+}
+.user{
+    float: right !important;
+}
+
+.login button {
+    border: none;
+    font-size: 15px;
+    font-family: Raleway;
+    padding: 9px;
+    background: none;
+}
+.navbar-nav > li > a {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+/*
+.BgImg {
+    background-position: inherit;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../Photos/kimberly-farmer-lUaaKCUANVI-unsplash.jpg');
+}*/
+.title {
+    text-align: center;
+    margin-top: -10px;
+    background: #0077b5;
+    padding: 15px;
+}
+.login nav {
+    position: relative;
+    min-height: 50px;
+    border: 5px solid transparent;
+    padding-left: 15px;
+}
+.login ul {
+    border-bottom: 1px solid #e4e4e4;
+    width: 100%;
+}
+.login li{
+    display: inline-block;
+    color: #0077b5;
+}
+.login ul{
+    margin:0;
+}
+.nav > li > a:hover,
+.nav > li > a:focus{
+    text-decoration: none;
+    background: none !important;
+}
+.nav > li::after {
+    display: block;
+    content: '';
+    border-bottom: 3px solid #0077b5;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+.nav > li:hover::after, 
+.nav > li.active::after {
+    transform: scaleX(1);
+}
+.login a {
+    font-size: 15px;
+    font-family: 'Raleway', sans-serif;
+    color: #333;
+    background: none !important;
+}
+.pom-agile {
+    padding: 8px 10px !important;
+    border-bottom: none !important;
+    margin: 5px 5px auto 5px;
+}
+.sub-agile label{
+    font-weight: normal !important;
+}
+.sub-main-w3{
+    padding-bottom: 30px !important;
+}
+.container{
+    padding-top:50px;
+}
+.container >div > div{
+    background: #0077b5;
+}
+.container input[type="submit"]{
+    background: white !important;
+    color: #0077b5 !important;
+}
+.dropdown-menu li{
+    width:100%;
+}
+.login a:hover {
+    color: #0077b5 !important;
+}
+.user li{
+    border-bottom:1px solid #cec4c4 ;
+}
+.user a:hover{
+    color: #0077b5;
+}
+.user i{
+    color: #333;
+}
+.login h1{
+    background: #0077b5;
+}
+/*.navText {
+    color: black;
+    font-size: 18px;
+    font-family: cursive;
+    color: #ffbc00
+}*/
+.margin{
+    margin-left:600px;
+}
+
+.tableBackground {
+    width:80%;
+    margin: auto;
+    background-color: white;
+}
+.dropdownItem {
+    display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    text-align: center;
+}
+.classButton {
+    background-color: transparent;
+    font-family: cursive;
+    color: black;
+    padding: unset !important;
+}
+.Detail {
+    margin-left: 150px;
+    display:block !important;
+}
+.studentBackground {
+    background-color: lightgrey;
+    padding: 10px;
+}
+.alignText {
+    text-align: center;
+    font-weight: bold;
+    font-size: x-large;
+}
+.formDiv {
+    width: 60%;
+    margin: auto;
+    background-color: white;
+}
+.form-horizontal .control-label {
+    min-width:24%;
+}
+.formSpecs{
+    background-color : white;
+    padding-bottom : 4%;
+    padding-top: 3%;    
+}
+.form-group.required .control-label:after {
+    content: "*";
+    color: red;
+}
+.heading {
+    text-align: center;
+    text-decoration: underline;
+    font-weight: 600;
+}
+.logoutColor {
+    color:#ffbc1e;
+}
+.DropdownPosition {
+    padding-left: 25px !important;
+    width: 50%;
+    float: left;
+    padding-right: 15px;
+}
+a:hover {
+    text-decoration:none;
+}
+.filePositionAdjust {
+    padding-top: 18px;
+    height: auto !important;
+}
+.centerAlign{
+    text-align : center;
+}
+.timeDisplay{
+    width: 150px;
+    border: 0;
+    background-color: #f0ffff;
+}
+tr:nth-of-type(odd) .timeDisplay{
+    background-color: #f9f9f9;
+}
+.formPadding {
+    padding-left: 45px;
+    padding-right: 45px;
+}
+.marginBottom{
+    margin-bottom: 15px;
+}
+.userTypeMargin{
+    margin-left: 11px;
+}
+.card {
+    height: 250px;
+    padding-top: 90px !important;
+    width: 200px;
+    font-size: x-large !important;
+    margin-left: 50px;
+    background-image: url('../Photos/cool-background (1).png') !important;
+    font-family: cursive;
+    color: #be6698 !important;
+    margin-bottom: 50px !important;
+    white-space: normal !important;
+}
+.textBox {
+    width: 230px !important;
+    height: 20px;
+    margin-left: 10px;
+}
+.buttonMargin{
+    margin-left: 100px;
+}
+.pom-agile input[type= "text"] {
+    outline: none;
+    font-size: .9em;
+    border: none;
+    background: transparent;
+    color: #000;
+    letter-spacing: 1px;
+}
+.buttonStyle {
+    color: #fff;
+    background: #09a5cd;
+    border: none;
+    padding: 12px 45px;
+    outline: none;
+    font-size: .9em;
+    cursor: pointer;
+    letter-spacing: 1px;
+    -webkit-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    transition: 0.5s all;
+}
+.divStyle{
+    background-color: aliceblue;
+    border-radius: 8px;
+}
+.messageStyle{
+    padding-left: 20px;
+    word-break: break-word;
+    font-size: 15px;
+    font-family:'Times New Roman';
+}
+.titleStyle {
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    color:red;
+    font-family: 'Times New Roman';
+}
+.dateStyle {
+    text-align: right;
+    padding-right: 25px;
+    color: #f8bb86;
+}
+textarea{
+    resize:none;
+}
+.notification{
+    padding: 80px 40px 40px 40px;
+}
+.notification ul{
+    list-style-type: none;
+    border-bottom: none;
+}
+.notification li button {
+    position: absolute;
+    left:90%;
+    background: transparent;
+    border: none;
+    margin-top:5px;
+}
+.notification li i{
+    display: none;
+}
+.notification li{
+    display:block;
+    border-bottom: 1px dashed #3333;
+
+}
+.notification li:hover i{
+    font-size: 18px;
+    display: block !important;
+    color: red;
+}
+.deleteToggle tr i{
+    display: none;
+}
+.deleteToggle tr:hover i{
+    display: block;
+}
+.login button:focus,
+.login button:active,
+.login button:visited {
+    outline: none !important;
+}
+.pad{
+    padding-top:60px;
+}
+.student{
+    height: 0px;
+}
+.student div{
+    width: 110px;
+}
+.address, .agileits-address-text {
+    border-bottom: none !important;
+}
+.schoolName {
+    color: aqua;
+    letter-spacing: 3px;
+    font-family: 'Raleway', sans-serif;
+}
+.child-right h3{
+    font-size:27px;
+}
+.child-right h5 {
+    font-size: 20px;
+}
+.main-section{
+    padding: 60px 20px 20px 20px;
+}
+.alignText select{
+    float: left;
+}
+.alignText a {
+    float: right;
+    border: none;
+    margin-right: 20px;
+}
+.admin{
+    padding-top:60px;
+}
+.admin > a:hover{
+    content: '';
+    border-top: 3px solid #0077b5;
+    transition: transform 0.3s ease-in-out;
+}
+.dropdown-toggle{
+    background: transparent;
+}
+li:hover .dropdown-menu {
+    display: block !important;
+    margin-top: 0 ;
+}
+.tableBackground input[type="month"] {
+    float: left;
+    height: 30px;
+    width: 200px;
+}
+.tableBackground input[type="submit"]{
+    float: left;
+    margin: 5px;
+    border: none;
+}
+.tableBackground input[type="submit"]:hover {
+        background: none;
+        color: #0077b5;
+}
+.tableBackground select{
+    border: none;
+}
+.salary{
+    margin-top: 65px;
+}
+.textArea {
+    padding-left: 25px !important;
+}
+.attendence input[type="submit"]{
+    float: right !important;
+    background:none;
+    border: groove 2px;
+}
+.attendence {
+    width: 80%;
+    text-align:center;
+    margin: auto;
+    background-color: white;
+}
+.marginTop_0{
+    margin-top:0;
+}
+.margin_bottom_20 {
+    margin-bottom: 20px;
+}
+.tab{
+    tab-size:8;
+}
+.selectBackground {
+    background: #d6d2d2;
+}
+.paddingTop_3{
+    padding-top: 3% !important;
+}

@@ -1,0 +1,60 @@
+﻿@model SchoolManagementSystem.ViewModels.StudentViewModels
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/design.css" rel="stylesheet" />
+
+
+<div class="tableBackground " id="myDiv">
+    <table class="table table-striped">
+        @foreach (var item in Model.GetClass)
+        {
+            using (Html.BeginForm("Classes", "Home", FormMethod.Get))
+            {
+        <caption class="alignText">
+            <select class="btn dropdown-toggle classButton" data-toggle="dropdown" name="data" onchange="this.form.submit()">
+                <option value="" class="dropdownItem">Select Class</option>
+                @foreach (var classList in Model.GetClassDetails)
+                {
+                    <option value="@classList.ClassId" class="dropdownItem">@classList.ClassName</option>
+                }
+            </select>
+            Class: @item.ClassDetail.ClassName
+            @if (Session["UserType"] != null && Session["UserType"].Equals("admin"))
+            {
+                foreach (var Class in Model.GetClass)
+                {
+                    <a class="btn classButton" href="@Url.Action("EditClass", "Misc", new { ClassId = Class.ClassDetail.ClassId})">Edit Class</a>
+                    break;
+                }
+            }
+
+        </caption>
+
+               
+            }
+            break;
+        }
+        <tr>
+            <th>Subject Name</th>
+            <th>Teacher Name</th>
+
+        </tr>
+
+        @foreach (var item in Model.GetClass)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject.SubjectName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.Name)
+                </td>
+            </tr>
+
+        }
+
+    </table>
+</div>

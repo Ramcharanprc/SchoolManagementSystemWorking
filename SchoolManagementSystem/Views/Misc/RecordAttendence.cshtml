@@ -1,0 +1,171 @@
+﻿@model SchoolManagementSystem.ViewModels.StudentViewModels
+@{
+    ViewBag.Title = "RecordAttendence";
+}
+
+@if (ViewBag.Successful != null)
+{
+<script>
+        window.onload = function () {
+            swal({
+                type: "success",
+                title: "Success",
+                text: "@ViewBag.Successful"
+            });
+        }
+
+</script>
+    ViewBag.Successful = null;
+}
+@if (ViewBag.Error != null)
+{
+<script>
+        window.onload = function () {
+        swal({
+            type: "error",
+            title: "Error",
+            text: "@ViewBag.Error"
+        });
+        }
+
+</script>
+    ViewBag.Error = null;
+}
+<form name="form1" onload="document.">
+    <div class="tableBackground">
+        @{ int counter = 0;}
+
+        <table class="table table-striped">
+
+            <caption class="alignText">
+                @using (Html.BeginForm("RecordAttendence", "Misc", FormMethod.Get, new { @class = "student" }))
+                {
+
+                    <select class="btn dropdown-toggle classButton" name="classId" onchange="this.form.submit();">
+                        <option value="">--Select Class--</option>
+                        @foreach (var item in Model.GetClassDetails)
+                        {
+                            int Classcounter = 0;
+                            foreach (var classCheck in Model.GetStudentClasses)
+                            {
+                                int count = Model.GetStudentClasses.Count;
+                                if (item.ClassId.Equals(classCheck))
+                                {
+                                    <option value="@item.ClassId" class="dropdownItem">@item.ClassName</option>
+                                    break;
+                                }
+                                else if (Classcounter == (count - 1))
+                                {
+                                    <option value="@item.ClassId" disabled class=" selectBackground dropdownItem">@item.ClassName</option>
+                                }
+                                Classcounter++;
+                            }
+                        }
+                    </select>
+                }
+
+                @foreach (var classs in Model.GetStudent)
+                {
+                    <h2 class="marginTop_0">Class: @classs.ClassDetail.ClassName</h2>
+                    <input name="classIdSelected" value="@classs.ClassId" hidden />
+                    break;
+                }
+
+            </caption>
+            <tr>
+                <th class="paddingTop_3">Student Name</th>
+                <th>
+                    <label>Present</label>&emsp;<label>Absent</label><br />&emsp;&emsp;Select All<br />
+                    &emsp;<input type="radio" value="1" name="select" onclick="selectAll(form1)" />&emsp;&emsp;&emsp;&ensp;
+                    <input type="radio" value="0" name="select" onclick="selectAll(form1)" />
+                </th>
+
+            </tr>
+            @foreach (var studet in Model.GetStudent)
+            {
+                <tr>
+                    <td>@studet.StudentName</td>
+                    <td>
+                        &emsp;<input type="radio" value="Yes" id="data" name="status @counter" /><label for="Yes"></label>&emsp;&emsp;&emsp;&ensp;
+                        <input type="radio" value="No" id="data" name="status @counter" /><label for="No"></label>
+
+                    </td>
+                </tr>
+                counter++;
+            }
+
+
+
+        </table>
+
+    </div>
+    <div class="tableBackground centerAlign">
+        @{
+            DateTime val = DateTime.Now;
+            <input type="date" name="date" value="@DateTime.Now.ToString("yyyy/MM/dd")" />
+
+        }
+        <input type="button" onclick="sendDataToController(form1)" value="Submit" />
+    </div>
+
+</form>
+
+<script type="text/javascript">
+    function selectAll(form1) {
+
+        var check = document.getElementsByName("select"),
+            radios = document.form1.elements;
+        if (check[0].checked) {
+            for (i = 0; i < radios.length; i++) {
+                if (radios[i].type == "radio") {
+                    if (radios[i].value == "Yes") {
+                        radios[i].checked = true;
+                    }
+                    else {
+                        if (radios[i].value != "1") {
+                            radios[i].checked = false;
+                        }
+                    }
+                }
+            }
+        } else {
+            for (i = 0; i < radios.length; i++) {
+                if (radios[i].type == "radio") {
+                    if (radios[i].value == "No") {
+                        radios[i].checked = true;
+                    }
+                    else {
+                        if (radios[i].value != "0") {
+                            radios[i].checked = false;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    function sendDataToController(form1) {
+        var Elements = document.form1.elements;
+        var radioOut = [];
+        var Date = document.getElementsByName("date")[0].value;
+        var ClassId = document.getElementsByName("classIdSelected")[0].value;
+        for (counter = 0; counter < Elements.length; counter++) {
+            if (Elements[counter].type == "radio") {
+                if (Elements[counter].checked == true) {
+                    if (Elements[counter].value == "Yes" || Elements[counter].value == "No") {
+                        radioOut.push(Elements[counter].value);
+                    }
+                }
+            }
+        }
+        $.ajax({
+            type: "POST",
+            traditional: true,
+            url: "@Url.Action("RecordAttendence", "Misc")",
+            data: { status: radioOut, classId: ClassId, date: Date }
+        });
+
+    }
+
+
+</script>

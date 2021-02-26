@@ -1,0 +1,109 @@
+﻿@model SchoolManagementSystem.ViewModels.StudentViewModels
+@{
+    ViewBag.Title = "AddTimeTable";
+}
+
+@if (ViewBag.Successful != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Success!",
+                text: "@ViewBag.Successful",
+                type: "success",
+            });
+        }
+    </script>
+    ViewBag.Successful = null;
+}
+@using (Html.BeginForm("AddTimeTable", "Misc", FormMethod.Post))
+{
+
+    <div class="centerAlign">
+        <label style="font-size:25px; font-weight: 500">Select Class:</label>
+        <select class="btn dropdown-toggle" name="SelectedClass" required>
+            <option value="">Select Class</option>
+            @{
+                var existingClasses = new List<string>();
+                for (int classCounter = 0; classCounter < Model.GetExistingClasses.Count; classCounter++)
+                {
+                    existingClasses.Add(Model.GetExistingClasses[classCounter]);
+                }
+            }
+
+            @foreach (var item in Model.GetClassDetails)
+            {
+                bool status = false;
+                foreach (var Class in Model.GetExistingClasses)
+                {
+                    if (item.ClassId.Equals(Class))
+                    {
+                        status = true;
+                    }
+                }
+                if (status == true)
+                {
+                    <option value="@item.ClassId" disabled>@item.ClassName</option>
+                    status = false;
+                }
+                else
+                {
+                    <option value="@item.ClassId">@item.ClassName</option>
+                }
+            }
+        </select>
+    </div>
+    <br />
+
+    <div class="tableBackground">
+        <table class="table table-striped">
+
+            <tr>
+                <th>Hour Time</th>
+                @foreach (var Day in Model.GetDay)
+                {
+                    <th name=@Day.DayId>@Day.Day1</th>
+                }
+            </tr>
+            @{
+                int counter = 0;
+            }
+
+            @foreach (var item in Model.GetHour)
+            {
+                if (counter == 4)
+                {
+                    <tr>
+                        <td>12:00 PM - 01:00 PM</td>
+                        <td colspan="6" class="centerAlign">Lunch Break</td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        <input class="timeDisplay" type="text" name="@item.HourId" value="@item.HourTime" disabled />
+                    </td>
+                    @for (int subjectCounter = 0; subjectCounter < 6; subjectCounter++)
+                    {
+                        <td>
+                            <select class="btn dropdown-toggle" name="SubjectId" required>
+                                <option value="">Select subject</option>
+                                @foreach (var subject in Model.GetSubject)
+                                {
+                                    <option value="@subject.SubjectId">@subject.SubjectName</option>
+                                }
+                            </select>
+
+                        </td>
+
+                    }
+                </tr>
+
+                counter++;
+            }
+        </table>
+    </div>
+    <div class="centerAlign">
+        <input type="submit" value="Save" class="btn btn-default" />
+        <a class="btn btn-default" href="@Url.Action("Administration", "Home")">Back</a>
+    </div>
+}

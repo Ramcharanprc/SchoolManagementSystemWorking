@@ -1,0 +1,160 @@
+﻿@model SchoolManagementSystem.ViewModels.StudentViewModels
+
+@{
+    ViewBag.Title = "TimeTable";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/design.css" rel="stylesheet" />
+@if (ViewBag.Successful != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Success",
+                text: "@ViewBag.Successful",
+                type: "success",
+            });
+        }
+    </script>
+    ViewBag.Successful = null;
+}
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Success",
+                text: "@ViewBag.Error",
+                type: "error",
+            });
+        }
+    </script>
+    ViewBag.Error = null;
+}
+<script>
+    function deleteWarning() {
+        var Class = $("#ClassName").val();
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you can't get the Timetable back!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, Delete it!",
+            closeOnConfirm: false,
+            closeOnCancel: false,
+        }, function (isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "@Url.Action("DeleteTimetable", "Misc")" + '?selectedClass=' + Class;
+            } else {
+                swal({
+                    title: "Cancelled",
+                    text: "Your Timetable is not deleted. It is safe.",
+                    type: "error",
+                });
+            }
+        });
+    }
+</script>
+
+<div class="tableBackground pad">
+    <table class="table table-striped">
+        @foreach (var item in Model.GetClass)
+        {
+            <caption class="alignText">
+
+                @if (Session["UserType"] != null && Session["UserType"].Equals("admin"))
+                {
+                    <a class="btn btn-default classButton" onclick="deleteWarning()">Delete Timetable</a>
+                }
+                @using (Html.BeginForm("TimeTable", "Home", FormMethod.Get))
+                {
+                    <select class="btn dropdown-toggle classButton" data-toggle="dropdown" name="selectedClass" onchange="this.form.submit()">
+                        <option value="" class="dropdownItem">Select Class</option>
+                        @{
+                            List<int> ExistingClass = new List<int>();
+                        }
+                        @foreach (var classList in Model.GetExistingClasses)
+                        {
+                            ExistingClass.Add(Convert.ToInt32(classList));
+                        }
+                        @{
+                            ExistingClass.Sort();
+                            ExistingClass.Reverse();
+                          }
+
+                        @foreach (var classCheck in ExistingClass)
+                        {
+                            foreach (var classList in Model.GetClassNamesAndIds)
+                            {
+                                if (classCheck == Convert.ToInt32(classList.ClassId))
+                                {
+                                    <option value="@classList.ClassId" class="dropdownItem">@classList.ClassDetail.ClassName</option>
+                                    break;
+                                }
+                            }
+                        }
+                    </select>
+                    if (Session["UserType"] != null && Session["UserType"].Equals("admin"))
+                    {
+                        foreach (var Class in Model.GetClass)
+                        {
+                            <a class="btn btn-default classButton" href="@Url.Action("EditTimetable", "Misc", new { @selectedClass = Class.ClassDetail.ClassId})">Edit Timetable</a>
+                            break;
+                        }
+                    }
+                }
+                Class: @item.ClassDetail.ClassName
+            </caption>
+            <input id="ClassName" value="@item.ClassDetail.ClassId" hidden />
+            break;
+        }
+        <tr>
+            <th>Hour Time</th>
+            @foreach (var item in Model.GetDay)
+            {
+                <th>@item.Day1</th>
+            }
+        </tr>
+        @{
+            int counter = 0;
+        }
+        @foreach (var item in Model.GetTimeTablePivot)
+        {
+            if (counter == 4)
+            {
+                <tr>
+                    <td>12:00 PM - 01:00 PM</td>
+                    <td colspan="6" class="centerAlign">Lunch Break</td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    @item.HourTime
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Monday)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tuesday)
+                </td>
+                <td>
+                    @item.Wednesday
+                </td>
+                <td>
+                    @item.Thursday
+                </td>
+                <td>
+                    @item.Friday
+                </td>
+                <td>
+                    @item.Saturday
+                </td>
+            </tr>
+
+            counter++;
+        }
+    </table>
+</div>

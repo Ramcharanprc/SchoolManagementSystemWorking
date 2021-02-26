@@ -1,0 +1,121 @@
+﻿@model IEnumerable<SchoolManagementSystem.Models.ClassDetail>
+
+@{
+    ViewBag.Title = "AddNewStudent";
+}
+@using (Html.BeginForm("AddNewStudent", "Misc", FormMethod.Post, new { @class = "formSpecs", enctype ="multipart/form-data"  }))
+{
+    <div class="form-horizontal formDiv">
+        <h4 >Student Registration Form</h4>
+        <hr />
+        <div class="form-group required">
+            <label class="control-label col-md-2">Student Name</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="StudentName" required />
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Class</label>
+            <div class="col-md-8">
+                <select class="form-control" data-toggle="dropdown" name="Class" required>
+                    <option value="" class="dropdownItem">Select Class</option>
+                    @foreach (var item in Model)
+                    {
+                        <option value="@item.ClassId" class="dropdownItem" name="Class">@item.ClassName</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group required">
+            <label class="control-label col-md-2">Father Name</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="FatherName" required />
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Mother Name</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="MotherName" required />
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Year of Joining</label>
+            <div class="col-md-8">
+                <input type="date" class="form-control" name="YearOfJoining" required />
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Address</label>
+            <div class="col-md-8">
+                <textarea type="text" class="form-control" name="Address" required ></textarea>
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Parent Contact Number</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="ContactNumber" required />
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Date of Birth</label>
+            <div class="col-md-8">
+                <input type="date" class="form-control" name="DateOfBirth" required />
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Gender</label>
+            <div class="col-md-8">
+                <select class="form-control" data-toggle="dropdown" name="Gender" required>
+                    <option value="" class="dropdownItem">Select Gender</option>
+                    <option value="Male" class="dropdownItem">Male</option>
+                    <option value="Female" class="dropdownItem">Female</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Father Occupation</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="FatherOccupation" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Blood Group</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="BloodGroup" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Guardian Email</label>
+            <div class="col-md-8">
+                <input type="email" class="form-control" name="Email" />
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label col-md-2">Student Photo</label>
+            <div class="col-md-8">
+                <input type="file" name="StudentPhoto" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+                @Html.ActionLink("Back", "Student", "Home", "", new {@class= "btn btn-default" })
+            </div>
+        </div>
+       
+    </div>
+}
+
+

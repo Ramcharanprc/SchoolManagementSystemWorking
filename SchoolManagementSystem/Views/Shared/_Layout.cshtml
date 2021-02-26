@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Oxford Schools</title>
+    @Scripts.Render("~/bundles/bootstrap")
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        function changeType(idName, fontAwesomeId) {
+            var id = $("#" + idName).attr("type");
+@*            var id1 = $("#password1").attr("type");
+                if (passwordType == "old") {*@
+            if (id == "password") {
+                $("#" + idName).attr("type", "text");
+                $("#" + fontAwesomeId).attr("class", "fa fa-eye-slash");
+                }
+                else {
+                $("#" + idName).attr("type", "password");
+                $("#" + fontAwesomeId).attr("class", "fa fa-eye");
+                }
+           @* }
+            else if (passwordType == "new") {
+                if (id1 == "password") {
+                    $("#password1").attr("type", "text");
+                    $("#fontAwesome1").attr("class", "fa fa-eye-slash");
+                }
+                else {
+                    $("#password1").attr("type", "password");
+                    $("#fontAwesome1").attr("class", "fa fa-eye");
+                }
+            }*@
+
+        }
+
+    </script>
+</head>
+<body class="login" onload="document.loginForm.Email.focus()">
+
+    <div>
+        <div>
+            <div class="title">
+                <h1 class="schoolName">Oxford English Medium School</h1>
+            </div>
+            <div>
+                <ul class="nav navbar-nav index-main-tablist">
+                    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li><a href="@Url.Action("Student", "Home")">Students</a></li>
+                    <li><a href="@Url.Action("Teachers", "Home")">Teachers</a></li>
+                    <li><a href="@Url.Action("Classes", "Home")">Classes</a></li>
+                    <li><a href="@Url.Action("TimeTable", "Home")">Time Table</a></li>
+                    <li>
+                        @{
+                            if (Session["UserType"] != null && (string)Session["UserType"] == ("admin"))
+                            {
+                                <a class="navText" href="@Url.Action("Administration", "Home")">Admistration</a>
+                            }
+                        }
+                    </li>
+                    <li><a href="@Url.Action("Notifications", "Home")">Notifications</a></li>
+                    <li class="user">
+
+                        @if (Session["EmployeeId"] != null)
+                        {
+
+                            <button data-toggle="dropdown" class="dropdown">@Session["Name"] <i class="fa fa-caret-down"></i></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("ChangePassword", "Home")">Change Password</a></li>
+                                <li><a class="logoutColor" href="@Url.Action("LogOut","login")">Logout</a></li>
+                            </ul>
+                        }
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        @RenderBody()
+
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+</body>
+</html>
