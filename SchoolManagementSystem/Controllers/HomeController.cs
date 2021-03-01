@@ -122,7 +122,7 @@ namespace SchoolManagementSystem.Controllers
                 if (CheckLoginStatus())
                 {
 
-                    var detail = db.Employees.Where(Employee => Employee.UserType.Equals("Teacher") || Employee.UserType.Equals("admin")).ToList();
+                    var detail = db.Employees.Where(Employee => (Employee.UserType.Equals("Teacher") || Employee.UserType.Equals("admin")) && Employee.Status == "A").ToList();
                     return View(detail);
                 }
                 else

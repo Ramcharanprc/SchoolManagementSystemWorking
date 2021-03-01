@@ -67,7 +67,7 @@
                 </td>
                 <td>
                     <!--<a href="~/Misc/StudentView">View</a>-->
-                    @Html.ActionLink("Edit", "Home", new { RegistrationId = item.RegistrationNumber }, htmlAttributes: null)
+                    @Html.ActionLink("View", "StudentView", "Misc", new { RegistrationId = item.RegistrationNumber }, htmlAttributes: null)
                     &nbsp&nbsp
                     @{
                         if ((string)Session["UserType"] == ("admin"))

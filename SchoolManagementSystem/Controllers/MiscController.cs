@@ -170,6 +170,11 @@ namespace SchoolManagementSystem.Controllers
         }
         public ActionResult EditEmployeeDetails(int employeeId)
         {
+            if(Session["success"] != null && Session["success"].Equals("success"))
+            {
+                ViewBag.Successful = "Employee detail updated successfully";
+                Session["success"] = null;
+            }
             using (SchoolEntities db = new SchoolEntities())
             {
                 var employee = db.Employees.Single(Employee => Employee.EmployeeId == employeeId);
@@ -177,11 +182,11 @@ namespace SchoolManagementSystem.Controllers
             }
         }
         [HttpPost]
-        public ActionResult EditEmployeeDetails(int employeeId, Employee employee)
+        public ActionResult EditEmployeeDetails(Employee employee)
         {
             using (SchoolEntities db = new SchoolEntities())
             {
-                var employeeDetails = db.Employees.Single(Employee => Employee.EmployeeId == employeeId);
+                var employeeDetails = db.Employees.Single(Employee => Employee.EmployeeId == employee.EmployeeId);
                 if (employee.ImageFile != null)
                 {
                     string fileName = Path.GetFileNameWithoutExtension(employee.ImageFile.FileName);
@@ -208,8 +213,9 @@ namespace SchoolManagementSystem.Controllers
                 employeeDetails.UserType = employee.UserType;
                 employeeDetails.YearOfJoining = employee.YearOfJoining;
                 db.SaveChanges();
+                Session["success"] = "success";
             }
-            return RedirectToAction("Teachers", "Home");
+            return RedirectToAction("EditEmployeeDetails", "Misc", new { @employeeId = employee.EmployeeId});
         }
         [HttpGet]
         public ActionResult AddTimeTable()
@@ -269,7 +275,7 @@ namespace SchoolManagementSystem.Controllers
                     ViewBag.Successful = "Class added successfully";
                     Session["success"] = null;
                 }
-                if (Session["error"] != null && Session["error"].Equals("Insert error"))
+                if (Session["error"] != null && Session["error"].Equals("error"))
                 {
                     ViewBag.Error = "There is a class available earlier. Please edit the class in classes page for modifications.";
                     Session["error"] = null;
@@ -303,13 +309,9 @@ namespace SchoolManagementSystem.Controllers
                         SqlParameter teacherParameter = new SqlParameter("@teacher", teacher);
                         SqlParameter subjectParameter = new SqlParameter("@subject", subject);
                         var response = db.Database.ExecuteSqlCommand("AddClass @classId, @className, @teacher, @subject", classIdParameter, classNameParameter, teacherParameter, subjectParameter);
-                        if (response == teacherDetails.Length)
+                        if (response > 0)
                         {
                             Session["success"] = "true";
-                        }
-                        else
-                        {
-                            Session["success"] = "false";
                         }
                     }
                     return RedirectToAction("AddClass");
@@ -319,7 +321,7 @@ namespace SchoolManagementSystem.Controllers
             {
                 if (dbEx.Number == 2627)
                 {
-                    Session["Error"] = "Insert error";
+                    Session["error"] = "error";
 
                 }
                 return RedirectToAction("AddClass");
@@ -502,6 +504,7 @@ namespace SchoolManagementSystem.Controllers
                     ViewBag.Successful = "Employee details deleted successfully";
                     Session["success"] = null;
                 }
+
                 return View(list);
             }
         }

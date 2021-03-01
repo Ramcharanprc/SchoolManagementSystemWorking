@@ -11,6 +11,9 @@
                 title: "Success!",
                 text: "@ViewBag.Successful",
                 type: "success",
+                closeOnConfirm: false
+            }, function (isConfirm) {
+                    window.location.href = "@Url.Action("Administration","Home")";
             });
         }
     </script>

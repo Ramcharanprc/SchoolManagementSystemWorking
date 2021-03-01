@@ -40,6 +40,7 @@
                 </td>
                 <td>
                     <!--<a href="~/Misc/StudentView">View</a>-->
+
                     @Html.ActionLink("View", "TeacherView", "Misc", new { EmployeeId = item.EmployeeId }, htmlAttributes: null)
                     &nbsp&nbsp
                     @{
@@ -57,10 +58,11 @@
 
     </table>
 </div>
+
 <script>
     function deleteEmployee(employeeId) {
     swal({
-        title: "Success",
+        title: "Warning",
         type: "warning",
         text: "Are you sure!",
         closeOnConfirm: false,

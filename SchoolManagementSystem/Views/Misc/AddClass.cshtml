@@ -10,7 +10,10 @@
             swal({
                 title: "Success!",
                 type: "success",
-                text : "@ViewBag.Successful"
+                text: "@ViewBag.Successful",
+                closeOnConfirm: false
+            }, function (isConfirm) {
+                    window.location.href = "@Url.Action("Administration", "Home")";
             });
         }
     </script>
@@ -101,7 +104,7 @@
         <div class="col-md-9">
             <div class="col-md-offset-2">
                 <input type="submit" value="Create" class="btn btn-default" />
-                @Html.ActionLink("Back", "Administration", "Home", new { @class = "btn btn-default" })
+                @Html.ActionLink("Back", "Administration", "Home", new { }, new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
