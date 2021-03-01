@@ -99,9 +99,9 @@
                 title: "Success!",
                 type: "success",
                 text: "@ViewBag.Successful",
-                @*closeOnConfirm: false,*@
-            }, function () {
-               // window.location.href = "@Url.Action("Classes", "Home")" + "?data=" + Class;
+                closeOnConfirm: false,
+        }, function (isConfirm) {
+               window.location.href = "@Url.Action("Classes", "Home")" + "?data=" + Class;
             });
     </script>
     ViewBag.Successful = null;

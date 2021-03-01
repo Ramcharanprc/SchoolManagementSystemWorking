@@ -3,6 +3,20 @@
 @{
     ViewBag.Title = "EditEmployeeDetails";
 }
+@if(ViewBag.Successful != null)
+{
+    <script>
+        swal({
+            title: "Success",
+            type: "success",
+            text: "@ViewBag.Successful",
+            closeOnConfirm: false,
+        }, function () {
+            window.location.href = "@Url.Action("ShowEmployee", "Misc")";
+        })
+    </script>
+    ViewBag.Successful = null;
+}
 
 @using (Html.BeginForm("EditEmployeeDetails", "Misc", FormMethod.Post, new { @class = "formSpecs", enctype = "multipart/form-data" }))
 {
